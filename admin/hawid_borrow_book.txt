@@ -1,0 +1,246 @@
+<?php include ('header.php'); ?>
+<?php 
+	$school_number = $_GET['school_number'];
+	
+	$user_query = mysqli_query($con,"SELECT * FROM user WHERE school_number = '$school_number' ");
+	$user_row = mysqli_fetch_array($user_query);
+?>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>
+					<small>Home /</small> Borrowed Books
+                </h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+					
+					<?php
+						$sql = mysqli_query($con,"SELECT * FROM user WHERE school_number = '$school_number' ");
+						$row = mysqli_fetch_array($sql);
+					?>
+					<h2>
+					Borrower Name : <span style="color:maroon;"><?php echo $row['firstname']." ".$row['lastname']; ?></span>
+					</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                        <!-- If needed 
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a></li>
+                                    <li><a href="#">Settings 2</a></li>
+                                </ul>
+                            </li>
+						-->
+                            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!-- content starts here -->
+						
+					<div class="row" style="margin-bottom:50px;">
+						<h2>Borrowed Book/s</h2>
+							<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
+				<form method="post" action="">
+									<th>Book Barcode</th>
+									<th>Title</th>
+									<th>Author</th>
+									<th>ISBN</th>
+									<th>Date Borrowed</th>
+									<th>Due Date</th>
+									<th>Action</th>
+							<?php 
+									$borrow_query = mysqli_query($con,"SELECT * FROM borrow_book
+									LEFT JOIN book ON borrow_book.book_id = book.book_id
+									WHERE user_id = '".$user_row['user_id']."' and borrowed_status = 'borrowed' ORDER BY borrow_book_id ASC") or die(mysqli_error());
+									$borrow_count = mysqli_num_rows($borrow_query);
+									while($borrow_row = mysqli_fetch_array($borrow_query)){
+										
+								$timezone = "Asia/Manila";
+								if(function_exists('date_default_timezone_set')) date_default_timezone_set($timezone);
+								$cur_date = date("F j, Y, g:i a");
+								$date_returned = date("F j, Y g:i a");
+								//$due_date = strtotime($cur_date);
+								//$due_date = strtotime("+3 day", $due_date);
+								//$due_date = date('F j, Y g:i a', $due_date);
+								///$checkout = date('m/d/Y', strtotime("+1 day", strtotime($due_date)));
+							?>
+							<tr>
+								<input type="hidden" name="date_returned" class="new_text" id="sd" value="<?php echo $date_returned ?>" size="16" maxlength="10"  />
+								<input type="hidden" name="user_id" value="<?php echo $borrow_row['user_id']; ?>">
+								<input type="hidden" name="book_id" value="<?php echo $borrow_row['book_id']; ?>">
+								<input type="hidden" name="date_borrowed" value="<?php echo $borrow_row['date_borrowed']; ?>">
+								<input type="hidden" name="due_date" value="<?php echo $borrow_row['due_date']; ?>">
+								<td><?php echo $borrow_row['book_barcode']; ?></td>
+								<td><?php echo $borrow_row['book_title']; ?></td>
+								<td><?php echo $borrow_row['author']; ?></td>
+								<td><?php echo $borrow_row['isbn']; ?></td>
+								<td><?php echo $borrow_row['date_borrowed']; ?></td>
+								<td><?php echo $borrow_row['due_date']; ?></td>
+								<td><button name="return" class="btn btn-primary">Returned</button></td>
+							</tr>
+							<?php 
+							}
+							if ($borrow_count <= 0){
+								echo '
+									<table>
+										<tr>
+											<td style="padding:10px;" class="alert alert-danger">No books borrowed</td>
+										</tr>
+									</table>
+								';
+							} 							
+							?>
+				</form>
+				
+							<?php
+								if (isset($_POST['return'])) {
+									$user_id= $_POST['user_id'];
+									$book_id= $_POST['book_id'];
+									$date_borrowed= $_POST['date_borrowed'];
+									$due_date= $_POST['due_date'];
+									$date_returned = $_POST['date_returned'];
+									
+
+									$update_copies = mysqli_query($con,"SELECT * from book where book_id = '$book_id' ") or die (mysqli_error());
+									$copies_row= mysqli_fetch_assoc($update_copies);
+									
+									$book_copies = $copies_row['book_copies'];
+									$new_book_copies = $book_copies + 1;
+									
+									mysqli_query($con,"UPDATE book SET book_copies = '$new_book_copies' where book_id = '$book_id' ") or die (mysqli_error());
+									
+									mysqli_query($con,"UPDATE borrow_book SET borrowed_status = 'returned' where user_id = '$user_id' and book_id = '$book_id' ") or die (mysqli_error());
+									
+									mysqli_query($con,"INSERT INTO return_book (user_id, book_id, date_borrowed, due_date, date_returned)
+									values ('$user_id', '$book_id', '$date_borrowed', '$due_date', '$date_returned')") or die (mysqli_error());
+							?>
+									<script>
+										window.location="borrow_book.php?school_number=<?php echo $school_number ?>";
+									</script>
+							<?php 
+																}
+							?>				
+
+							</table>
+						</div>
+						
+					<div class="row">
+						<form method="post">
+							<div class="col-xs-4">
+								<input type="text" style="margin-bottom:10px; margin-left:-9px;" class="form-control" name="barcode" placeholder="Enter barcode here.....">
+							</div>
+						</form>
+						<table class="table table-bordered">
+							<form method="post" action="">
+							<th>Barcode</th>
+							<th>Title</th>
+							<th>Author</th>
+							<th>ISBN</th>
+							<th>Action</th>
+							<?php 
+								if (isset($_POST['barcode'])){
+									$barcode = $_POST['barcode'];
+									
+									$book_query = mysqli_query($con,"SELECT * FROM book WHERE book_barcode = '$barcode' ") or die (mysqli_error());
+									$book_count = mysqli_num_rows($book_query);
+									$book_row = mysqli_fetch_array($book_query);
+									
+									if ($book_row['book_barcode'] != $barcode){
+										echo '
+											<table>
+												<tr>
+													<td>No match for the barcode entered!</td>
+												</tr>
+											</table>
+										';
+									}else{
+							?>
+							<tr>
+							<input type="hidden" name="user_id" value="<?php echo $user_row['user_id'] ?>">
+							<input type="hidden" name="book_id" value="<?php echo $book_row['book_id'] ?>">
+							
+							<td><?php echo $book_row['book_barcode'] ?></td>
+							<td style="text-transform: capitalize"><?php echo $book_row['book_title'] ?></td>
+							<td style="text-transform: capitalize"><?php echo $book_row['author'] ?></td>
+							<td><?php echo $book_row['isbn'] ?></td>
+							<td><button name="borrow" class="btn btn-info">Borrow</button></td>
+							</tr>
+							<?php } }?>
+
+							<?php
+							$timezone = "Asia/Manila";
+							if(function_exists('date_default_timezone_set')) date_default_timezone_set($timezone);
+							$cur_date = date("F j, Y, g:i a");
+							$date_borrowed = date("F j, Y g:i a");
+							$due_date = strtotime($cur_date);
+							$due_date = strtotime("+3 day", $due_date);
+							$due_date = date('F j, Y g:i a', $due_date);
+							///$checkout = date('m/d/Y', strtotime("+1 day", strtotime($due_date)));
+							?>
+							<input type="hidden" name="due_date" class="new_text" id="sd" value="<?php echo $due_date ?>" size="16" maxlength="10"  />
+							<input type="hidden" name="date_borrowed" class="new_text" id="sd" value="<?php echo $date_borrowed ?>" size="16" maxlength="10"  />
+							
+							<?php 
+								if (isset($_POST['borrow'])){
+									$user_id =$_POST['user_id'];
+									$book_id =$_POST['book_id'];
+									$date_borrowed =$_POST['date_borrowed'];
+									$due_date =$_POST['due_date'];
+									
+									$borrow_trapper= mysqli_query($con,"SELECT * from borrow_book where user_id = '$user_id' and borrowed_status = 'borrowed' ") or die (mysqli_error());
+									$count_trapper = mysqli_num_rows($borrow_trapper);
+									$count_array = mysqli_fetch_array($borrow_trapper);
+									
+									if ($count_trapper >= 3){
+										echo "<script>alert('3 Books Allowed per User!'); window.location='borrow.php'</script>";
+									}elseif ($count_array['book_id'] == $book_id){
+										echo "<script>alert('Book Already Borrowed!'); window.location='borrow.php'</script>";
+									}else{
+										
+									$update_copies = mysqli_query($con,"SELECT * from book where book_id = '$book_id' ") or die (mysqli_error());
+									$copies_row= mysqli_fetch_assoc($update_copies);
+									
+									$book_copies = $copies_row['book_copies'];
+									$new_book_copies = $book_copies - 1;
+									
+									if ($new_book_copies == 4){
+										echo "<script>alert('Book out of Copy!'); window.location='borrow.php'</script>";
+									}else{
+									
+									mysqli_query($con,"UPDATE book SET book_copies = '$new_book_copies' where book_id = '$book_id' ") or die (mysqli_error());
+									
+									mysqli_query($con,"INSERT INTO borrow_book(user_id,book_id,date_borrowed,due_date,borrowed_status)
+									VALUES('$user_id','$book_id','$date_borrowed','$due_date','borrowed')") or die (mysqli_error());
+									}
+									}
+							?>
+									
+									
+									<script>
+										window.location="borrow_book.php?school_number=<?php echo $school_number ?>";
+									</script>
+							<?php	
+								}
+							?>
+							</form>
+						</table>
+						
+					</div>
+				</div>
+						
+						
+                        <!-- content ends here -->
+                    </div>
+                </div>
+            </div>
+
+<?php include ('footer.php'); ?>
