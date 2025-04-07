@@ -1,3 +1,39 @@
+/* Add these CSS rules to make footer sticky */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 45px; /* Height of the footer */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.right_col {
+    flex: 1 0 auto; /* Make content area expand to fill space */
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    background: #fff;
+    padding: 5px 20px;
+    margin: 0;
+    border-top: 1px solid #e5e5e5;
+    z-index: 999;
+}
+
+/* Update existing footer styles */
+footer .pull-right {
+    margin: 0;
+    line-height: 35px;
+}
+
 body.nav-sm .container.body .left_col {
     width: 70px;
     padding: 0;

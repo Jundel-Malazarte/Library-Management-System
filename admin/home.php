@@ -10,7 +10,8 @@
 	<link rel="stylesheet" href="./css/custom.css">
 </head>
 <body>
-	<div class="clearfix"></div>
+<div class="content-wrapper">
+	<div class="clearfix">
 	<!-- top tiles -->
 	<div class="row tile_count" style="margin-right:-245px;">
 		<div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
@@ -85,6 +86,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<!-- /top tiles -->
 
 	<?php include('slide.php'); ?>
