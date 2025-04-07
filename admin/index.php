@@ -1,6 +1,51 @@
 <?php 
- // Include database connection
- include('include/dbcon.php');
+// Start session first
+session_start();
+
+// Include database connection
+include('include/dbcon.php');
+
+// If already logged in, redirect to home
+if(isset($_SESSION['id'])) {
+    header('Location: home.php');
+    exit();
+}
+
+// Login processing
+if (isset($_POST['login'])) {
+    if (!$con) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // Sanitize user inputs
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
+
+    try {
+        // Prepare and execute query
+        $login_query = mysqli_query($con, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
+        
+        if (!$login_query) {
+            throw new Exception(mysqli_error($con));
+        }
+
+        $count = mysqli_num_rows($login_query);
+        $row = mysqli_fetch_array($login_query);
+
+        if ($count > 0) {
+            // Store admin ID in session
+            $_SESSION['id'] = $row['admin_id'];
+            
+            // Redirect to home page using header
+            header('Location: home.php');
+            exit();
+        } else {
+            $error_msg = "Invalid username or password";
+        }
+    } catch (Exception $e) {
+        $error_msg = "Error: " . $e->getMessage();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,49 +186,12 @@
                         <p>© <?php echo date('Y'); ?> Library Management System</p>
                     </div>
                 </div>
-                <?php
-                // Database connection
-                if (isset($_POST['login'])) {
-                    // Sanitize user inputs
-                    $username = mysqli_real_escape_string($con, $_POST['username']);
-                    $password = mysqli_real_escape_string($con, $_POST['password']);
 
-                    // Check if connection is successful
-                    if (!$con) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    }
-
-                    try {
-                        // Prepare and execute query
-                        $login_query = mysqli_query($con, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
-                        
-                        if (!$login_query) {
-                            throw new Exception(mysqli_error($con));
-                        }
-
-                        $count = mysqli_num_rows($login_query);
-                        $row = mysqli_fetch_array($login_query);
-
-                        if ($count > 0) {
-                            // Start session and store admin ID
-                            session_start();
-                            $_SESSION['id'] = $row['admin_id'];
-                            
-                            // Redirect to home page
-                            echo "<script>window.location='home.php';</script>";
-                            exit();
-                        } else {
-                            echo '<div class="alert alert-danger">
-                                    <h3 class="blink_text">Invalid username or password</h3>
-                                  </div>';
-                        }
-                    } catch (Exception $e) {
-                        echo '<div class="alert alert-danger">
-                                <h3 class="blink_text">Error: ' . $e->getMessage() . '</h3>
-                              </div>';
-                    }
-                }
-                ?>
+                <?php if(isset($error_msg)): ?>
+                <div class="alert alert-danger">
+                    <h3 class="blink_text"><?php echo htmlspecialchars($error_msg); ?></h3>
+                </div>
+                <?php endif; ?>
             </form>
         </div>
     </div>
