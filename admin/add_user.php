@@ -101,10 +101,10 @@
 									</label>
 									<div class="col-md-4">
                                         <select name="level" class="select2_single form-control" required="required" tabindex="-1" >
-                                            <option value="Grade 7">Grade 7</option>
-                                            <option value="Grade 8">Grade 8</option>
-                                            <option value="Grade 9">Grade 9</option>
-                                            <option value="Grade 10">Grade 10</option>
+                                            <option value="First year">1st Year</option>
+                                            <option value="Second year">2nd Year</option>
+                                            <option value="Third year">3rd Year</option>
+                                            <option value="Fourth year">4th Year</option>
                                             <option value="Faculty">Faculty</option>
                                         </select>
                                 </div>
@@ -167,22 +167,20 @@
 									$level = $_POST['level'];
 									$section = $_POST['section'];
 					
-					$result=mysqli_query($con,"select * from user WHERE school_number='$school_number' ") or die (mysqli_error());
-					$row=mysqli_num_rows($result);
-					if ($row > 0)
-					{
-					echo "<script>alert('ID Number already active!'); window.location='user.php'</script>";
-					}
-					else
-					{		
-						mysqli_query($con,"insert into user (school_number,firstname, middlename, lastname, contact, gender, address, type, level, section, status, user_added)
-						values ('$school_number','$firstname', '$middlename', '$lastname', '$contact', '$gender', '$address', '$type', '$level', '$section', 'Active', NOW())")or die(mysqli_error());
+                    $result=mysqli_query($con,"select * from user WHERE school_number='$school_number' ") or die (mysqli_error($con));
+                    $row=mysqli_num_rows($result);
+                    if ($row > 0)
+                    {
+                    echo "<script>alert('ID Number already active!'); window.location='user.php'</script>";
+                    }
+                    else
+                    {		
+                        mysqli_query($con,"insert into user (school_number,firstname, middlename, lastname, contact, gender, address, type, level, section, status, user_added)
+                        values ('$school_number','$firstname', '$middlename', '$lastname', '$contact', '$gender', '$address', '$type', '$level', '$section', 'Active', NOW())")or die(mysqli_error($con));
 						echo "<script>alert('User successfully added!'); window.location='user.php'</script>";
 					}
-			//						}
-			//						}
-							}
-								?>
+					}
+					?>
 						
                         <!-- content ends here -->
                     </div>
