@@ -2,7 +2,7 @@
             <div class="col-md-3 left_col">
                             <div class="left_col scroll-view">
                                 <div class="navbar nav_title" style="border: 0;">
-                                    <a href="home.php" class="site_title"><i class="fa fa-university"></i><span style="font-size: 14px;">Library Management System</span></a>            </div>
+                                    <a href="home.php" class="site_title"><span style="font-size: 14px;">Library Management System</span><i class="fa fa-university"></i></a></div>
                                 <div class="clearfix"></div>
 
                                 <!-- menu prile quick info -->

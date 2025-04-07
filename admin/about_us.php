@@ -12,23 +12,15 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
+					<div class="x_title"></div>
+						<h2><i class="fa fa-info"></i> About Us</h2>
+						<p>Welcome to our Library Management System - a comprehensive solution designed for students to easily borrow and manage books. This system streamlines the book borrowing process, helping students access educational resources efficiently while enabling library staff to maintain accurate records of all transactions.</p>
 							<br />
 							<br />
                     <div class="x_title">
                         <h2><i class="fa fa-info"></i> Developer Information</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                        <!-- If needed 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Settings 1</a></li>
-                                    <li><a href="#">Settings 2</a></li>
-                                </ul>
-                            </li>
-						-->
                             <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                         </ul>
                         <div class="clearfix"></div>
@@ -38,13 +30,13 @@
 
                 <div class="" role="tabpanel" data-example-id="togglable-tabs">
                     <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Joenel J. Padilla</a>
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Jundel B. Malazarte</a>
                         </li>
-                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab"  aria-expanded="false">Rolyn Jasper C. Demerin</a>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab"  aria-expanded="false">Ryan D. Gabutin</a>
                         </li>
-                        <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Hyzel Jen Jumilla</a>
+                        <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Anna Marie Calvario</a>
                         </li>
-                        <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Mark Anthony M. Monaya</a>
+                        <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Heroshi G. Paro</a>
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content">
@@ -55,7 +47,7 @@
 										Age
 										<ul>
 											<li>
-											19 years old
+											22 years old
 											</li>
 										</ul>
 									</dt>
@@ -71,7 +63,7 @@
 										Date of Birth
 										<ul>
 											<li>
-											April 28, 1996
+											January 29, 2003
 											</li>
 										</ul>
 									</dt>
@@ -79,7 +71,7 @@
 										Place of Birth
 										<ul>
 											<li>
-											Silay City
+											Taptap Cebu City
 											</li>
 										</ul>
 									</dt>
@@ -106,7 +98,7 @@
 										Course
 										<ul>
 											<li>
-											Bachelor of Science in Information Systems
+											Bachelor of Science in Information Technology
 											</li>
 										</ul>
 									</dt>
@@ -114,7 +106,7 @@
 										School
 										<ul>
 											<li>
-											Carlos Hilado Memorial State College
+											University Of Cebu Main Campus
 											</li>
 										</ul>
 									</dt>
@@ -122,7 +114,7 @@
 										School Year
 										<ul>
 											<li>
-											2015 – 2016
+											2021 – 2025
 											</li>
 										</ul>
 									</dt>
@@ -136,7 +128,7 @@
 										Age
 										<ul>
 											<li>
-											20 years old
+											24 years old
 											</li>
 										</ul>
 									</dt>
@@ -152,7 +144,7 @@
 										Date of Birth
 										<ul>
 											<li>
-											Novenber 13, 1995
+											...
 											</li>
 										</ul>
 									</dt>
@@ -160,7 +152,7 @@
 										Place of Birth
 										<ul>
 											<li>
-											Bacolod City
+											Guadalupe Cebu City
 											</li>
 										</ul>
 									</dt>
@@ -187,7 +179,7 @@
 										Course
 										<ul>
 											<li>
-											Bachelor of Science in Information Systems
+											Bachelor of Science in Information Technology
 											</li>
 										</ul>
 									</dt>
@@ -195,7 +187,7 @@
 										School
 										<ul>
 											<li>
-											Carlos Hilado Memorial State College
+											University Of Cebu Main Campus
 											</li>
 										</ul>
 									</dt>
@@ -203,7 +195,7 @@
 										School Year
 										<ul>
 											<li>
-											2015 – 2016
+											2021 – 2025
 											</li>
 										</ul>
 									</dt>
@@ -218,7 +210,7 @@
 										Age
 										<ul>
 											<li>
-											20 years old
+											...
 											</li>
 										</ul>
 									</dt>
@@ -234,7 +226,7 @@
 										Date of Birth
 										<ul>
 											<li>
-											July 2, 1995
+											...
 											</li>
 										</ul>
 									</dt>
@@ -242,7 +234,7 @@
 										Place of Birth
 										<ul>
 											<li>
-											Bacolod City
+											...
 											</li>
 										</ul>
 									</dt>
@@ -269,7 +261,7 @@
 										Course
 										<ul>
 											<li>
-											Bachelor of Science in Information Systems
+											Bachelor of Science in Information Technology
 											</li>
 										</ul>
 									</dt>
@@ -277,7 +269,7 @@
 										School
 										<ul>
 											<li>
-											Carlos Hilado Memorial State College
+											University Of Cebu Main Campus
 											</li>
 										</ul>
 									</dt>
@@ -285,7 +277,7 @@
 										School Year
 										<ul>
 											<li>
-											2015 – 2016
+											2021 – 2025
 											</li>
 										</ul>
 									</dt>
@@ -300,7 +292,7 @@
 										Age
 										<ul>
 											<li>
-											24 years old
+											...
 											</li>
 										</ul>
 									</dt>
@@ -316,7 +308,7 @@
 										Date of Birth
 										<ul>
 											<li>
-											January 21, 1991
+											...
 											</li>
 										</ul>
 									</dt>
@@ -324,7 +316,7 @@
 										Place of Birth
 										<ul>
 											<li>
-											Silay City
+											...
 											</li>
 										</ul>
 									</dt>
@@ -351,7 +343,7 @@
 										Course
 										<ul>
 											<li>
-											Bachelor of Science in Information Systems
+											Bachelor of Science in Information Technology
 											</li>
 										</ul>
 									</dt>
@@ -359,7 +351,7 @@
 										School
 										<ul>
 											<li>
-											Carlos Hilado Memorial State College
+											University Of Cebu Main Campus
 											</li>
 										</ul>
 									</dt>
@@ -367,7 +359,7 @@
 										School Year
 										<ul>
 											<li>
-											2015 – 2016
+											2021 – 2025
 											</li>
 										</ul>
 									</dt>
