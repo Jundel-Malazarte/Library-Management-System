@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2025 at 04:06 AM
+-- Generation Time: Apr 07, 2025 at 10:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,8 +45,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `confirm_password`, `admin_image`, `admin_type`, `admin_added`) VALUES
-(1, 'Admin', 'B.', 'User', 'admin', 'admin', 'admin', '', 'Admin', '2015-09-05 11:40:50'),
-(2, 'Jundel', 'B.', 'Malazarte', 'encoder', 'encoder', 'encoder', '', 'Encoder', '2015-09-29 11:40:50');
+(1, 'Admin', 'B.', 'User', 'admin', 'admin', 'admin', '', 'Admin', '2015-09-05 11:40:50');
 
 -- --------------------------------------------------------
 
@@ -83,6 +82,13 @@ CREATE TABLE `barcode` (
   `suf_barcode` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `barcode`
+--
+
+INSERT INTO `barcode` (`barcode_id`, `pre_barcode`, `mid_barcode`, `suf_barcode`) VALUES
+(1, 'VNHS', 1, 'LMS');
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +115,13 @@ CREATE TABLE `book` (
   `date_added` datetime NOT NULL,
   `remarks` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`book_id`, `book_title`, `category_id`, `author`, `author_2`, `author_3`, `author_4`, `author_5`, `book_copies`, `book_pub`, `publisher_name`, `isbn`, `copyright_year`, `status`, `book_barcode`, `book_image`, `date_added`, `remarks`) VALUES
+(8, 'Test', 2, 'dflam', 'adad', 'adad', 'asdasd', 'adad', 10, '2025', '2024', '1234', 2019, 'New', 'VNHS1LMS', 'Test.jpg', '2025-04-07 15:18:56', 'Available');
 
 -- --------------------------------------------------------
 
@@ -138,8 +151,20 @@ CREATE TABLE `category` (
   `classname` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `category`
+--
 
-INSERT INTO `category` (`category_id`, `classname`) VALUES(1, 'Fiction'), (2, 'Non-Fiction'), (3, 'Science'), (4, 'History'), (5, 'Biography'), (6, 'Fantasy'), (7, 'Mystery'), (8, 'Romance');
+INSERT INTO `category` (`category_id`, `classname`) VALUES
+(1, 'Fiction'),
+(2, 'Non-Fiction'),
+(3, 'Science'),
+(4, 'History'),
+(5, 'Biography'),
+(6, 'Fantasy'),
+(7, 'Mystery'),
+(8, 'Romance');
+
 -- --------------------------------------------------------
 
 --
@@ -211,7 +236,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `school_number`, `firstname`, `middlename`, `lastname`, `contact`, `gender`, `address`, `type`, `level`, `section`, `user_image`, `status`, `user_added`) VALUES
 (42, '21429212', 'Ryan', '', 'Gabutin', '09123456789', 'Male', 'Guadalupe Cebu', 'Student', 'Fourt year', '4C', '', 'Active', '2025-04-07 09:30:44'),
-(43, '21536214', 'Jundel', 'B.', 'Malazarte', '09816650907', 'Male', 'Sambag 1 pob Cebu City', 'Student', 'Fourth year', '4C', '', 'Active', '2025-04-07 09:33:10');
+(43, '21536214', 'Jundel', 'B.', 'Malazarte', '09816650907', 'Male', 'Sambag 1 pob Cebu City', 'Student', 'Fourth year', '4C', '', 'Active', '2025-04-07 09:33:10'),
+(44, '20264172', 'Heroshi', 'G.', 'Paro', '09123455668', 'Female', 'Toledo City Cebu', 'Student', 'Fourth year', '4B', '', 'Active', '2025-04-07 13:44:45'),
+(45, '18737698', 'Francisco ', 'R.', 'Friolo', '09123456788', 'Male', 'Banilad Cebu City', 'Student', 'Fourth year', '4E', '', 'Active', '2025-04-07 15:37:04');
 
 -- --------------------------------------------------------
 
@@ -330,13 +357,13 @@ ALTER TABLE `allowed_days`
 -- AUTO_INCREMENT for table `barcode`
 --
 ALTER TABLE `barcode`
-  MODIFY `barcode_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `barcode_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `borrow_book`
@@ -348,7 +375,7 @@ ALTER TABLE `borrow_book`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `penalty`
@@ -372,7 +399,7 @@ ALTER TABLE `return_book`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `user_log`
