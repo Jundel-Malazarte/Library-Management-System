@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2025 at 03:40 AM
+-- Generation Time: Apr 07, 2025 at 04:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -81,6 +81,33 @@ CREATE TABLE `barcode` (
   `pre_barcode` varchar(100) NOT NULL,
   `mid_barcode` int(100) NOT NULL,
   `suf_barcode` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book`
+--
+
+CREATE TABLE `book` (
+  `book_id` int(11) NOT NULL,
+  `book_title` varchar(100) NOT NULL,
+  `category_id` int(50) NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `author_2` varchar(100) NOT NULL,
+  `author_3` varchar(100) NOT NULL,
+  `author_4` varchar(100) NOT NULL,
+  `author_5` varchar(100) NOT NULL,
+  `book_copies` int(11) NOT NULL,
+  `book_pub` varchar(100) NOT NULL,
+  `publisher_name` varchar(100) NOT NULL,
+  `isbn` varchar(50) NOT NULL,
+  `copyright_year` int(11) NOT NULL,
+  `status` varchar(30) NOT NULL,
+  `book_barcode` varchar(100) NOT NULL,
+  `book_image` varchar(100) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `remarks` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -226,6 +253,12 @@ ALTER TABLE `barcode`
   ADD PRIMARY KEY (`barcode_id`);
 
 --
+-- Indexes for table `book`
+--
+ALTER TABLE `book`
+  ADD PRIMARY KEY (`book_id`);
+
+--
 -- Indexes for table `borrow_book`
 --
 ALTER TABLE `borrow_book`
@@ -296,6 +329,12 @@ ALTER TABLE `allowed_days`
 --
 ALTER TABLE `barcode`
   MODIFY `barcode_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `book`
+--
+ALTER TABLE `book`
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `borrow_book`
