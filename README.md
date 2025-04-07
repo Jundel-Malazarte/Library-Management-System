@@ -1,10 +1,10 @@
 ## Library Management System
 
-#### Emplementation:
+### Emplementation:
 - Login
 - logout
 
-#### File information:
+### File information:
 - Home Page / Dashboard
 - Members List > Students List | Teacher list  
 - Books List > ViewBooks List > Edit books
