@@ -138,6 +138,8 @@ CREATE TABLE `category` (
   `classname` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+
+INSERT INTO `category` (`category_id`, `classname`) VALUES(1, 'Fiction'), (2, 'Non-Fiction'), (3, 'Science'), (4, 'History'), (5, 'Biography'), (6, 'Fantasy'), (7, 'Mystery'), (8, 'Romance');
 -- --------------------------------------------------------
 
 --
